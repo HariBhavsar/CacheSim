@@ -1,4 +1,4 @@
-OBJECTS = sha-256.o ScatterCache.o SACache.o CacheHierarchy.o SplitCache.o RMapper.o GenericCache.o CacheMemory.o RSHA256.o RAES_NI.o RSASS_AES_NI.o RCAT.o RP_LRU.o RP_PLRU.o RP_BIP.o RP_QLRU.o RP_RANDOM.o
+OBJECTS = sha-256.o caeser.o ScatterCache.o SACache.o CacheHierarchy.o SplitCache.o RMapper.o GenericCache.o CacheMemory.o RSHA256.o RAES_NI.o RSASS_AES_NI.o RCAT.o RP_LRU.o RP_PLRU.o RP_BIP.o RP_QLRU.o RP_RANDOM.o
 
 DEBUG_FLAG = -DNDEBUG
 
@@ -13,6 +13,9 @@ all: objects
 objects: $(OBJECTS)
 
 ScatterCache.o: ScatterCache.cpp sha-256.o NoisyCache.h ScatterCache.h Cache.h
+	g++ $(FLAGS) -c $(basename $@).cpp
+
+caeser.o: caeser.cpp sha-256.o NoisyCache.h ScatterCache.h Cache.h
 	g++ $(FLAGS) -c $(basename $@).cpp
 
 sha-256.o: sha-256.c sha-256.h
